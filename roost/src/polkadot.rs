@@ -58,9 +58,6 @@ pub async fn polkadot_sign(message: &str) -> Result<(), Error> {
 
     let sign_payload = get_sign_request(message, address)?;
 
-    console::log_1(&sign_payload);
-    console::log_1(&sign_raw);
-
     let sign_promise: Promise = sign_raw.call1(&JsValue::NULL, &sign_payload)?.into();
 
     let signature = wasm_bindgen_futures::JsFuture::from(sign_promise).await?;
