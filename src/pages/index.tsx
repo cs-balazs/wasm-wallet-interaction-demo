@@ -12,25 +12,23 @@ const Home: NextPage = () => {
     )
   }, [])
 
-  const ethereumSign = async () => {
+  const onEthereumSign = async () => {
     if (!wasm) console.error("WASM is not yet initialized")
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const { ethereum_sign } = await wasm
-    ethereum_sign(msg)
+    const { ethereumSign } = await wasm
+    ethereumSign(msg)
   }
 
-  const polkadotSign = async () => {
+  const onPolkadotSign = async () => {
     if (!wasm) console.error("WASM is not yet initialized")
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const { polkadot_sign } = await wasm
-    polkadot_sign(msg)
+    const { polkadotSign } = await wasm
+    polkadotSign(msg)
   }
 
   return (
     <Group>
       <Input value={msg} onChange={(e) => setMsg(e.target.value)} />
-      <Button onClick={ethereumSign}>Ethereum sign</Button>
-      <Button onClick={polkadotSign}>Polkadot sign</Button>
+      <Button onClick={onEthereumSign}>Ethereum sign</Button>
+      <Button onClick={onPolkadotSign}>Polkadot sign</Button>
     </Group>
   )
 }

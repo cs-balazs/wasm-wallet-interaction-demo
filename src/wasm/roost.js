@@ -158,10 +158,10 @@ function __wbg_adapter_31(arg0, arg1, arg2, arg3) {
 * @param {string} message
 * @returns {Promise<void>}
 */
-export function polkadot_sign(message) {
+export function ethereumSign(message) {
     const ptr0 = passStringToWasm0(message, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
     const len0 = WASM_VECTOR_LEN;
-    const ret = wasm.polkadot_sign(ptr0, len0);
+    const ret = wasm.ethereumSign(ptr0, len0);
     return takeObject(ret);
 }
 
@@ -169,10 +169,10 @@ export function polkadot_sign(message) {
 * @param {string} message
 * @returns {Promise<void>}
 */
-export function ethereum_sign(message) {
+export function polkadotSign(message) {
     const ptr0 = passStringToWasm0(message, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
     const len0 = WASM_VECTOR_LEN;
-    const ret = wasm.ethereum_sign(ptr0, len0);
+    const ret = wasm.polkadotSign(ptr0, len0);
     return takeObject(ret);
 }
 

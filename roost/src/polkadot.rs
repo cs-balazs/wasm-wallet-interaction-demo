@@ -11,8 +11,8 @@ fn get_sign_request(msg: &str, address: String) -> Result<js_sys::Object, Error>
     Ok(sign_request_param)
 }
 
-#[wasm_bindgen]
-pub async fn polkadot_sign(message: &str) -> Result<(), Error> {
+#[wasm_bindgen(js_name = polkadotSign)]
+pub async fn sign(message: &str) -> Result<(), Error> {
     let window = window().expect("Failed to access window object");
 
     let injected_web3 = window
