@@ -18,6 +18,8 @@ fn get_sign_request(msg: &str, address: String) -> Result<js_sys::Object, Error>
 
 #[wasm_bindgen]
 pub async fn ethereum_sign(message: &str) -> Result<(), Error> {
+    console::log_2(&"Message to sign:".into(), &message.into());
+
     let window = window().expect("Failed to access window object");
 
     let ethereum = window
@@ -30,7 +32,7 @@ pub async fn ethereum_sign(message: &str) -> Result<(), Error> {
         .as_string()
         .expect("Failed to cast window.ethereum.selectedAddress to String");
 
-    console::log_1(&format!("Hello {}! Please sign this.", &address).into());
+    console::log_1(&format!("Hello {}", &address).into());
 
     let request: Function = js_sys::Reflect::get(&ethereum, &JsString::from("request"))?.into();
 

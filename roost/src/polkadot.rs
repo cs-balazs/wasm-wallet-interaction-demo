@@ -13,6 +13,8 @@ fn get_sign_request(msg: &str, address: String) -> Result<js_sys::Object, Error>
 
 #[wasm_bindgen]
 pub async fn polkadot_sign(message: &str) -> Result<(), Error> {
+    console::log_2(&"Message to sign:".into(), &message.into());
+
     let window = window().expect("Failed to access window object");
 
     let injected_web3 = window
@@ -21,9 +23,6 @@ pub async fn polkadot_sign(message: &str) -> Result<(), Error> {
 
     let polkadot_js: JsValue =
         js_sys::Reflect::get(&injected_web3, &JsString::from("polkadot-js"))?;
-
-    console::log_2(&"Message to sign".into(), &message.into());
-    console::log_1(&polkadot_js);
 
     let enable: Function = js_sys::Reflect::get(&polkadot_js, &JsString::from("enable"))?.into();
 
@@ -41,8 +40,6 @@ pub async fn polkadot_sign(message: &str) -> Result<(), Error> {
     ))
     .await?
     .into();
-
-    console::log_1(&addresses);
 
     let name: String = js_sys::Reflect::get(&addresses.at(0), &"name".into())?
         .as_string()
