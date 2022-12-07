@@ -4,6 +4,11 @@
 * @param {string} message
 * @returns {Promise<void>}
 */
+export function polkadot_sign(message: string): Promise<void>;
+/**
+* @param {string} message
+* @returns {Promise<void>}
+*/
 export function ethereum_sign(message: string): Promise<void>;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
@@ -12,6 +17,7 @@ export interface InitOutput {
   readonly memory: WebAssembly.Memory;
   readonly main: (a: number, b: number) => number;
   readonly ethereum_sign: (a: number, b: number) => number;
+  readonly polkadot_sign: (a: number, b: number) => number;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
   readonly __wbindgen_export_2: WebAssembly.Table;
