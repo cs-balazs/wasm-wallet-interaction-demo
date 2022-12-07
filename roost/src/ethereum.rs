@@ -28,7 +28,7 @@ pub async fn ethereum_sign(message: &str) -> Result<(), Error> {
 
     let address: String = js_sys::Reflect::get(&ethereum, &JsString::from("selectedAddress"))?
         .as_string()
-        .expect("Failed to convert window.ethereum.selectedAddress to String");
+        .expect("Failed to cast window.ethereum.selectedAddress to String");
 
     console::log_1(&format!("Hello {}! Please sign this.", &address).into());
 
@@ -41,7 +41,7 @@ pub async fn ethereum_sign(message: &str) -> Result<(), Error> {
     let signature: String = wasm_bindgen_futures::JsFuture::from(res)
         .await?
         .as_string()
-        .expect("Failed to convert signature to String.");
+        .expect("Failed to cast signature to String.");
 
     console::log_1(&format!("Signature: {}", &signature).into());
 
