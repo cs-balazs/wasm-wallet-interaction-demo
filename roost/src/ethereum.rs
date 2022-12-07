@@ -42,9 +42,7 @@ pub async fn ethereum_sign(message: &str) {
 
     let sign_request = get_sign_request(message, address);
 
-    let res: Promise = js_sys::Function::call1(&request, &JsValue::NULL, &sign_request)
-        .unwrap()
-        .into();
+    let res: Promise = request.call1(&JsValue::NULL, &sign_request).unwrap().into();
 
     let signature: String = wasm_bindgen_futures::JsFuture::from(res)
         .await

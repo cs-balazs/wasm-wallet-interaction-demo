@@ -1,3 +1,3 @@
-use roost::ethereum;
+pub use roost;
 
 fn main() {}
