@@ -13,8 +13,6 @@ fn get_sign_request(msg: &str, address: String) -> Result<js_sys::Object, Error>
 
 #[wasm_bindgen]
 pub async fn polkadot_sign(message: &str) -> Result<(), Error> {
-    console::log_2(&"Message to sign:".into(), &message.into());
-
     let window = window().expect("Failed to access window object");
 
     let injected_web3 = window
@@ -49,6 +47,7 @@ pub async fn polkadot_sign(message: &str) -> Result<(), Error> {
         .expect("Failed to cast addresses[0] to String");
 
     console::log_1(&format!("Hello {}! ({})", name, address).into());
+    console::log_2(&"Message to sign:".into(), &message.into());
 
     let signer = js_sys::Reflect::get(&lib, &"signer".into())?;
     let sign_raw: Function = js_sys::Reflect::get(&signer, &"signRaw".into())?.into();
