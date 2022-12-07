@@ -20,10 +20,9 @@ const Web3ConnectionContext = createContext({
 const Web3ConnectionProvider = ({
   children,
 }: PropsWithChildren<unknown>): JSX.Element => {
-  const { connectors, connect, isConnected, isConnecting, pendingConnector, error } =
-    useConnect()
+  const { connectors, pendingConnector, error, connect } = useConnect()
   const { disconnect } = useDisconnect()
-  const { data: accountData } = useAccount()
+  const { address, isConnected, isConnecting } = useAccount()
 
   const [isConnectionModalOpen, setIsConnectionModalOpen] = useState(false)
   const openConnectionModal = () => setIsConnectionModalOpen(true)
@@ -60,7 +59,7 @@ const Web3ConnectionProvider = ({
           </Alert>
         )}
 
-        <Group spacing="sm" direction="column">
+        <Group spacing="sm">
           {connectors.map((connector) => (
             <Button
               key={connector.id}
@@ -78,7 +77,7 @@ const Web3ConnectionProvider = ({
               loaderProps={{
                 size: "xs",
               }}
-              onClick={() => connect(connector)}
+              onClick={() => connect({ connector })}
             >
               {connector.name}
               {!connector.ready && " (unsupported)"}
@@ -97,9 +96,9 @@ const Web3ConnectionProvider = ({
         size="sm"
         title="Account"
       >
-        {accountData?.address && (
-          <Group spacing="sm" direction="row" position="apart">
-            <Text size="xl">{shortenHex(accountData.address, 5)}</Text>
+        {address && (
+          <Group spacing="sm" position="apart">
+            <Text size="xl">{shortenHex(address, 5)}</Text>
             <Button
               color="gray"
               size="xs"

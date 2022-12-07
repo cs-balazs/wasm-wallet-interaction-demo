@@ -1,7 +1,7 @@
 import { MantineProvider } from "@mantine/core"
 import { AppProps } from "next/app"
 import Head from "next/head"
-import { WagmiProvider } from "wagmi"
+import { WagmiConfig } from "wagmi"
 import Layout from "../components/Layout"
 import { Web3ConnectionProvider } from "../components/Layout/Web3ConnectionContext"
 import { client } from "../connectors"
@@ -23,13 +23,13 @@ const App = ({ Component, pageProps }: AppProps) => (
         colorScheme: "dark",
       }}
     >
-      <WagmiProvider client={client}>
+      <WagmiConfig client={client}>
         <Web3ConnectionProvider>
           <Layout>
             <Component {...pageProps} />
           </Layout>
         </Web3ConnectionProvider>
-      </WagmiProvider>
+      </WagmiConfig>
     </MantineProvider>
   </>
 )
